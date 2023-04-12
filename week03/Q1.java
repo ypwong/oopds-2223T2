@@ -1,100 +1,61 @@
-import java.time.LocalDate;
-import java.util.Scanner;
+// Exercise 1: Account Class
+// Define an Account class that contains the following data and operations. Your class should be
+// encapsulated.
 
-class Account {
-  // data fields
-  private int id;
-  private double balance = 100;
-  private LocalDate dateCreated = LocalDate.now();
-  private static int numberOfAccount;
-  // constructors
-  public Account() { 
-    numberOfAccount++;
-  }
-  public Account(int id, double balance) {
-    this.id = id;
-    this.balance = balance;
-    numberOfAccount++;
-  }
-  // accessors
-  public int getId() {
-    return id;
-  }
-  public double getBalance() {
-    return balance;
-  }
-  public LocalDate getDateCreated() {
-    return dateCreated;
-  }
-  public static int getNnumberOfAccount() {
-    return numberOfAccount;
-  }   
-  // mutators
-  public void withdraw(double amount) {
-    if (amount < 0)
-      System.out.println ("Error: Cannot withdraw negative amount");
-    else if (amount > balance)
-      System.out.println ("Error: Insufficient balance");
-    else 
-      balance -= amount;
-  }
-  public void deposit(double amount) {
-    if (amount < 0)
-      System.out.println ("Error: Cannot deposit negative amount");
-    else
-      balance += amount;
-  }
-}
+// a) An int data field named id for the account.
 
+// b) A double data field named balance for the account (default 100).
 
-class Q1 {
-  public static void main (String[] args) {
-    Scanner input = new Scanner (System.in);    
+// c) A LocalDate data field named dateCreated that stores the date on which the account is
+// created.
 
-    Account[] accounts = new Account[3];
-    accounts[0] = new Account();
-    accounts[1] = new Account(102, 2000);
+// d) A no-arg constructor.
 
-    System.out.println ("Create the 3rd account");
-    System.out.print ("Enter account id: ");
-    int accountId = input.nextInt();
-    System.out.print ("Enter balance   : RM");
-    double balance = input.nextDouble();
-    accounts[2] = new Account(accountId, balance);
-    
-    for (int i = 0; i < accounts.length; i++) {
-      System.out.println ();
-      System.out.println ("Account #" + (i+1));
-      System.out.println ("Account id = " + accounts[i].getId());
-      System.out.println ("Created    = " + accounts[i].getDateCreated());
-      System.out.printf  ("Balance    = RM%.2f%n", accounts[i].getBalance());
-    }
-    
-    System.out.printf ("%nDepost and Withdraw%n");
-    System.out.print ("Enter account id: ");
-    accountId = input.nextInt();
+// e) An overloaded constructor that creates an account with the specified id and initial balance.
 
-    Account selectedAccount = search (accounts, accountId);
+// f) Accessors for all data fields.
 
-    if (selectedAccount == null)
-      System.out.print ("Account not found.");
-    else {
-      System.out.print  ("Enter amount to deposit: RM");
-      double amount = input.nextDouble();
-      selectedAccount.deposit (amount);
-      System.out.printf ("Balance                = RM%.2f%n", selectedAccount.getBalance());
+// g) A method named deposit that deposits a specified amount to the account. If a negative amount
+// is provided, reject the deposit and display an error message.
 
-      System.out.print  ("Enter amount to withdraw: RM");
-      amount = input.nextDouble();
-      selectedAccount.withdraw (amount);
-      System.out.printf ("Balance                 = RM%.2f%n", selectedAccount.getBalance());
-    }
-  }
+// h) A method named withdraw that withdraws a specified amount from the account. If there is
+// insufficient balance in the account or negative amount is provided, reject the withdrawal and
+// display an error message.
+// Write a program that:
 
-  public static Account search (Account[] accounts, int accountId) {
-    for (Account a: accounts) 
-      if (a.getId() == accountId)
-        return a;
-    return null;
-  }
-}
+// i) Creates an Array of 3 Account objects.
+// o For the first account, use no-arg constructor.
+// o For the second account, use overloaded constructor (id=102, balance=2000).
+// o For the third account, ask user input for id and balance.
+
+// j) Print the details of all accounts.
+
+// k) Ask user to input for an existing account id, display error if it is not found. Otherwise, ask user to
+// enter the amount to deposit and the amount to withdraw from the account, print the balance. Try
+// entering negative amount and withdrawing more money than the balance.
+
+// Sample run:
+// Create the 3rd account
+// Enter account id: 103
+// Enter balance : RM3000
+
+// Account #1
+// Account id = 0
+// Created = 2022-11-16
+// Balance = RM100.00
+// Account #2
+// Account id = 102
+// Created = 2022-11-16
+// Balance = RM2000.00
+// Account #3
+// Account id = 103
+// Created = 2022-11-16
+// Balance = RM3000.00
+
+// Depost and Withdraw
+// Enter account id: 103
+// Enter amount to deposit: RM33
+// Balance = RM3033.00
+// Enter amount to withdraw: RM1000
+// Balance = RM2033.00
+
